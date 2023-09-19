@@ -58,6 +58,8 @@ class HolonomicRobot:
 
     def inverMotor(self, motor : int):
         # switch statement for 4 motors
+
+        # TODO CREATE MOTOR CLASS AND MOVE THIS METHOD TO IT
         match motor:
             case 1:
                 GPIO.output(self.IN1A, GPIO.LOW) # Set AIN1
