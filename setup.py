@@ -4,7 +4,7 @@ package_name = 'autonomous_robot'
 
 setup(
     name=package_name,
-    version='0.0.0',
+    version='0.0.1',
     packages=find_packages(exclude=['test']),
     data_files=[
         ('share/ament_index/resource_index/packages',
@@ -15,8 +15,8 @@ setup(
     zip_safe=True,
     maintainer='andromeda',
     maintainer_email='58833781+AndromedaHelix@users.noreply.github.com',
-    description='TODO: Package description',
-    license='TODO: License declaration',
+    description='Autonomous Holonomic Robot',
+    license='Apache License',
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
