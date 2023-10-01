@@ -1,0 +1,46 @@
+import RPi.GPIO as GPIO
+
+from geometry_msgs.msg import Vector3
+
+class Motor:
+
+    def __init__(self, IN1, IN2, PWM, inverted):
+        self.inverted = inverted
+
+        self.IN1 = IN1
+        self.IN2 = IN2
+        self.PWM = PWM
+
+        GPIO.setmode(GPIO.BOARD)
+        GPIO.setwarnings(False)
+
+        # Setting GPIO pins for all motors pins
+        GPIO.setup(self.IN1, GPIO.OUT) 
+        GPIO.setup(self.IN2, GPIO.OUT) 
+        GPIO.setup(self.PWM, GPIO.OUT) 
+
+        # Starting PWM 
+        self.pwm : GPIO.PWM = GPIO.PWM(self.PWM, 100)
+        self.pwm.start(0)
+
+    def moveMotor(self, movement : Vector3):
+        
+        self.pwm.ChangeDutyCycle(movement.z)
+        if self.inverted:
+            GPIO.output(self.IN1, GPIO.LOW)
+            GPIO.output(self.IN2, GPIO.HIGH)
+        else :
+            GPIO.output(self.IN1, GPIO.HIGH)
+            GPIO.output(self.IN2, GPIO.LOW)
+
+
+    
+       
+    
+    def stop(self):
+        self.pwm.ChangeDutyCycle(0)
+        GPIO.output(self.IN1, GPIO.LOW)
+        GPIO.output(self.IN2, GPIO.LOW)
+    
+    def invert(self):
+        self.inverted = not self.inverted
