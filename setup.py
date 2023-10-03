@@ -20,7 +20,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-                'listener = autonomous_robot.cmdvel_listener:main',
+                'robot = autonomous_robot.robot_cmdvel:main',
         ],
     },
 )

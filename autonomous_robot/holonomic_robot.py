@@ -14,8 +14,11 @@ class HolonomicRobot:
     
     def moveRobot (self, movement : Vector3):
         print("Moving Motor")
-        self.motor1.moveMotor(movement)
-        self.motor2.moveMotor(movement)
-        self.motor3.moveMotor(movement)
-        self.motor4.moveMotor(movement)
+        
+        xSpeed = movement.x
+        ySpeed = movement.y
 
+        self.motor1.moveMotor(ySpeed)
+        self.motor2.moveMotor(xSpeed)
+        self.motor3.moveMotor(xSpeed)
+        self.motor4.moveMotor(ySpeed)

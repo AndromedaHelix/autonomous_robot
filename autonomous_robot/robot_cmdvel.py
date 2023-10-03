@@ -12,24 +12,23 @@ from autonomous_robot.motor import Motor
 
 class CmdVelListener(Node): 
     def __init__(self):
-        super().__init__('cmdvel_listener')
+        super().__init__('robot_cmdvel')
         self.subscription = self.create_subscription(
             Vector3,
-            'cmdvel',
+            'cmd_vel',
             self.listener_callback,
             10)
         self.subscription  # prevent unused variable warning
 
         self.robot = HolonomicRobot(
             Motor(37, 36, 40, False), 
-            Motor(35, 33, 38, False), 
-            Motor(10, 12, 5, True), 
+            Motor(35, 33, 38, True), 
+            Motor(10, 12, 5, False), 
             Motor(7, 8, 3, True))
               
-
     def listener_callback(self, msg : Vector3):
         self.robot.moveRobot(msg)
-        self.get_logger().info('I heard: "%s"' % msg.z)
+        self.get_logger().info('I heard: "%s, %s"' % (msg.x, msg.y))
 
 def main(args=None):
     rclpy.init(args=args)
