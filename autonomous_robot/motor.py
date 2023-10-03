@@ -23,9 +23,19 @@ class Motor:
         self.pwm : GPIO.PWM = GPIO.PWM(self.PWM, 100)
         self.pwm.start(0)
 
-    def moveMotor(self, movement : Vector3):
+    def moveMotor(self, movement : float):
         
-        self.pwm.ChangeDutyCycle(movement.z)
+        # Checking if movement is less than 0, if yes, invert else keep the same value
+
+        if movement < 0:
+            movement = abs(movement)
+            self.invert()
+        elif self.inverted:
+            self.invert()
+                
+        movement = max(0, min(movement, 100))
+
+        self.pwm.ChangeDutyCycle(movement)
         if self.inverted:
             GPIO.output(self.IN1, GPIO.LOW)
             GPIO.output(self.IN2, GPIO.HIGH)
@@ -33,10 +43,6 @@ class Motor:
             GPIO.output(self.IN1, GPIO.HIGH)
             GPIO.output(self.IN2, GPIO.LOW)
 
-
-    
-       
-    
     def stop(self):
         self.pwm.ChangeDutyCycle(0)
         GPIO.output(self.IN1, GPIO.LOW)
