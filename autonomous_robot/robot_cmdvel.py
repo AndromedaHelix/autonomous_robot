@@ -21,10 +21,10 @@ class CmdVelListener(Node):
         self.subscription  # prevent unused variable warning
 
         self.robot = HolonomicRobot(
-            Motor(37, 36, 40, False), 
-            Motor(35, 33, 38, True), 
-            Motor(10, 12, 5, False), 
-            Motor(7, 8, 3, True))
+            Motor(13, 15, 16, False), 
+            Motor(10, 12, 8, False), 
+            Motor(35, 37, 31, False), 
+            Motor(36, 38, 32, False))
               
     def listener_callback(self, msg : Vector3):
         self.robot.moveRobot(msg)
