@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="robot">
+
+    <xacro:include filename="robot_include.xacro" />
+
+    <link name = "world"></link>
+
+    <joint name="camera_joint" type="fixed">
+        <parent link="base_link"></parent>
+        <child link="camera_link"></child>
+        <origin xyz="0 0 0" rpy="0 0 0"></origin>
+    </joint>
+
+    <link name="camera_link">
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <box size="0.1 0.03 0.03"/>
+            </geometry>
+            <material name="red">
+                <color rgba="1 0.2 0.2 1"/>
+            </material>
+        </visual>
+    </link>
+
+
+    <joint name="camera_optical_joint" type="fixed">
+        <parent link="camera_link"></parent>
+        <child link="camera_optical_link"></child>
+        <origin xyz="0 0 0" rpy="${-pi/2} 0 ${-pi/2}"></origin>
+    </joint>
+
+    <link name="camera_optical_link">
+    </link>
+
+    <gazebo reference="camera_link">
+        <material name="red">
+            <color rgba="1 0.2 0.2 1"/>
+        </material>
+    </gazebo>
+
+</robot>
