@@ -12,10 +12,10 @@ from autonomous_robot.motor import Motor
 
 class CmdVelListener(Node): 
     def __init__(self):
-        super().__init__('robot_cmdvel')
+        super().__init__('velocity_listener')
         self.subscription = self.create_subscription(
             Vector3,
-            'cmd_vel',
+            'robot_velocity',
             self.listener_callback,
             10)
         self.subscription  # prevent unused variable warning

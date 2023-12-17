@@ -2,7 +2,6 @@
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="robot">
 
     <xacro:include filename="robot_include.xacro" />
-    <xacro:include filename="camera.xacro" />
 
     <link name = "world"></link>
 
@@ -45,8 +44,8 @@
     <xacro:motor_joint_macro name="back_motor_joint" child="back_motor_link" x="0" y="-${base_radius - motor_length / 2}" z="${base_height / 2 + motor_height / 2}" yy="-${pi/2}" />
 
     <xacro:motor_link_macro name="right_motor_link" motor_length="${motor_length}" motor_width="${motor_width}" motor_height="${motor_height}" x="0" z="0" />
-    <xacro:motor_link_macro name="front_motor_link" motor_length="${motor_length}" motor_width="${motor_width}" motor_height="${motor_height}" x="0" z="0}"/>
-    <xacro:motor_link_macro name="left_motor_link" motor_length="${motor_length}" motor_width="${motor_width}" motor_height="${motor_height}" x="0}" z="0"/>
+    <xacro:motor_link_macro name="front_motor_link" motor_length="${motor_length}" motor_width="${motor_width}" motor_height="${motor_height}" x="0" z="0"/>
+    <xacro:motor_link_macro name="left_motor_link" motor_length="${motor_length}" motor_width="${motor_width}" motor_height="${motor_height}" x="0" z="0"/>
     <xacro:motor_link_macro name="back_motor_link" motor_length="${motor_length}" motor_width="${motor_width}" motor_height="${motor_height}" x="0" z="0"/>
 
     <xacro:property name="wheel_radius" value="0.5" />
