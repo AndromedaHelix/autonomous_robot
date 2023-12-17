@@ -1,6 +1,5 @@
 # Written by Juan Pablo Gutiérrez
 
-import RPi.GPIO as GPIO
 from geometry_msgs.msg import Vector3
 
 from autonomous_robot.motor import Motor

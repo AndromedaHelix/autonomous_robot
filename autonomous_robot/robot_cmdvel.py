@@ -5,8 +5,6 @@ from rclpy.node import Node
 
 from geometry_msgs.msg import Vector3
 
-import RPi.GPIO as GPIO
-
 from autonomous_robot.holonomic_robot import HolonomicRobot
 from autonomous_robot.motor import Motor
 

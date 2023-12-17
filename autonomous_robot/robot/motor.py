@@ -1,7 +1,5 @@
 import RPi.GPIO as GPIO
 
-from geometry_msgs.msg import Vector3
-
 class Motor:
 
     def __init__(self, IN1, IN2, PWM, inverted):
