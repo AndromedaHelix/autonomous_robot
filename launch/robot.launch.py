@@ -24,8 +24,14 @@ def generate_launch_description():
     robot_node = Node(
         package='autonomous_robot',
         executable='velocity_listener',
-        name="robot_node"
+        name="robot_node",
+        parameters=[{'use_sim_time': True}]  # Add the use_sim_time parameter here
     )
+    joint_state_publisher_node = Node(
+        package='joint_state_publisher',
+        executable='joint_state_publisher',
+        name='joint_state_publisher',
+  )
 
     foxglove_bridge_share = get_package_share_directory("foxglove_bridge")
 
@@ -37,4 +43,4 @@ def generate_launch_description():
         AnyLaunchDescriptionSource(foxglove_bridge_launch_file_path)
     )
 
-    return LaunchDescription([node_robot_state_publisher, robot_node, foxglove_bridge_launch])
+    return LaunchDescription([node_robot_state_publisher, robot_node, joint_state_publisher_node, foxglove_bridge_launch])
