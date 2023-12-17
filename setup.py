@@ -16,7 +16,6 @@ setup(
         # Add the xacro files to be included in the installation
         (os.path.join('share', package_name), ['description/robot.urdf.xacro']),
         (os.path.join('share', package_name), ['description/robot_include.xacro']),
-        (os.path.join('share', package_name), ['description/camera.xacro']),
     ],
     install_requires=['setuptools'],
     zip_safe=True,
@@ -27,7 +26,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'robot = autonomous_robot.robot_cmdvel:main',
+            'velocity_listener = autonomous_robot.robot_cmdvel:main',
         ],
     },
 )

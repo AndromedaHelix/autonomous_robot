@@ -23,7 +23,7 @@ def generate_launch_description():
 
     robot_node = Node(
         package='autonomous_robot',
-        executable='robot',
+        executable='velocity_listener',
         name="robot_node"
     )
 
