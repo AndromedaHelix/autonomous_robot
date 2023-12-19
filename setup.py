@@ -16,6 +16,7 @@ setup(
         # Add the xacro files to be included in the installation
         (os.path.join('share', package_name), ['description/robot.urdf.xacro']),
         (os.path.join('share', package_name), ['description/robot_include.xacro']),
+        (os.path.join('share', package_name), ['description/robot_gazebo.xacro']),
     ],
     install_requires=['setuptools'],
     zip_safe=True,
