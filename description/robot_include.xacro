@@ -79,7 +79,7 @@
             <parent link="${parent}"/>
             <child link="${child}"/>
             <origin xyz="${x} ${y} ${z}" rpy="0 ${pi/2} 0"/>
-            <axis xyz="0 0 1"/>
+            <axis xyz="0 0 1" rpy="0 0 0"/>
         </joint>
     </xacro:macro>
 
@@ -108,7 +108,7 @@
 
     <xacro:macro name="motor_joint_macro" params="name child x y z yy">
         <joint name="${name}" type="fixed">
-            <parent link="base_link"/>
+            <parent link="chassis_link"/>
             <child link="${child}"/>
             <origin xyz="${x} ${y} ${z}" rpy="0 0 ${yy}"/>
         </joint>
