@@ -3,18 +3,10 @@
 
     <xacro:include filename="robot_include.xacro" />
 
-    <link name = "world"></link>
+    <xacro:property name="base_radius" value="0.260" />
+    <xacro:property name="base_height" value="0.03" />
 
-    <xacro:property name="base_radius" value="3.6" />
-    <xacro:property name="base_height" value="0.3" />
-    <joint name = "base_joint" type = "fixed">
-        <parent link = "world"></parent>
-        <child link = "base_link"></child>
-        <origin xyz = "10 10 ${base_height}" rpy = "0 0 0"></origin>
-    </joint>
-
-
-    <link name="base_link">
+    <link name="chassis_link">
         <visual>
             <origin xyz="0 0 0" rpy="0 0 0"/>
             <geometry>
@@ -35,9 +27,9 @@
         </xacro:inertial_cylinder>
     </link>
 
-    <xacro:property name="motor_length" value="2.5" />
-    <xacro:property name="motor_width" value="1.5" />
-    <xacro:property name="motor_height" value="0.1" />
+    <xacro:property name="motor_length" value="0.07" />
+    <xacro:property name="motor_width" value="0.014" />
+    <xacro:property name="motor_height" value="0.01" />
     <xacro:motor_joint_macro name="right_motor_joint" child="right_motor_link" x="${base_radius - motor_length / 2}" y="0" z="${base_height / 2 + motor_height / 2}" yy="0" />
     <xacro:motor_joint_macro name="front_motor_joint" child="front_motor_link" x="0" y="${base_radius - motor_length / 2}" z="${base_height / 2 + motor_height / 2}" yy="${pi/2}" />
     <xacro:motor_joint_macro name="left_motor_joint" child="left_motor_link" x="${-base_radius + motor_length / 2}" y="0" z="${base_height / 2 + motor_height / 2}" yy="${pi}" />
@@ -48,8 +40,8 @@
     <xacro:motor_link_macro name="left_motor_link" motor_length="${motor_length}" motor_width="${motor_width}" motor_height="${motor_height}" x="0" z="0"/>
     <xacro:motor_link_macro name="back_motor_link" motor_length="${motor_length}" motor_width="${motor_width}" motor_height="${motor_height}" x="0" z="0"/>
 
-    <xacro:property name="wheel_radius" value="0.5" />
-    <xacro:property name="wheel_width" value="0.5" />
+    <xacro:property name="wheel_radius" value="0.05" />
+    <xacro:property name="wheel_width" value="0.05" />
     <xacro:wheel_joint_macro name="right_wheel_joint" parent="right_motor_link" child="right_wheel_link" x="${motor_length / 2 + wheel_width / 2}" y="0 " z="0" />
     <xacro:wheel_joint_macro name="left_wheel_joint" parent="left_motor_link" child="left_wheel_link" x="${motor_length / 2 + wheel_width / 2}" y="0" z="0" />
     <xacro:wheel_joint_macro name="front_wheel_joint" parent="front_motor_link" child="front_wheel_link" x="${motor_length / 2 + wheel_width / 2}" y="0" z="0" />
@@ -59,4 +51,6 @@
     <xacro:wheel_link_macro name="left_wheel_link" wheel_width="${wheel_width}" wheel_radius="${wheel_radius}" />
     <xacro:wheel_link_macro name="front_wheel_link" wheel_width="${wheel_width}" wheel_radius="${wheel_radius}" />
     <xacro:wheel_link_macro name="back_wheel_link" wheel_width="${wheel_width}" wheel_radius="${wheel_radius}" />
+
+    <xacro:include filename="robot_gazebo.xacro"/>
 </robot>
