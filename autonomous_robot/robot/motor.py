@@ -1,4 +1,5 @@
 import RPi.GPIO as GPIO
+from simple_pid import PID
 
 class Motor:
 
@@ -21,19 +22,25 @@ class Motor:
         self.pwm : GPIO.PWM = GPIO.PWM(self.PWM, 100)
         self.pwm.start(0)
 
-    def moveMotor(self, movement : float):
+        #PID Setup
+        self.pid = PID(1, 0.1, 0.05, setpoint=1) # TODO SET CONSTANTS
         
+
+    def moveMotor(self, angularVelocity : float):
+        # PID
+        control = self.pid(angularVelocity)
+
         # Checking if movement is less than 0, if yes, invert else keep the same value
 
-        if movement < 0:
-            movement = abs(movement)
+        if control < 0:
+            control = abs(control)
             self.invert()
         elif self.inverted:
             self.invert()
                 
-        movement = max(0, min(movement, 100))
+        control = max(0, min(control, 100))
 
-        self.pwm.ChangeDutyCycle(movement)
+        self.pwm.ChangeDutyCycle(control)
         if self.inverted:
             GPIO.output(self.IN1, GPIO.LOW)
             GPIO.output(self.IN2, GPIO.HIGH)
@@ -48,3 +55,6 @@ class Motor:
     
     def invert(self):
         self.inverted = not self.inverted
+
+    def getSpeed(self):
+        return self.pwm.ChangeDutyCycle(0) # TODO SET THIS TO THE REAL VALUE
