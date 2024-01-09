@@ -3,7 +3,7 @@
 import rclpy 
 from rclpy.node import Node
 
-from geometry_msgs.msg import Vector3
+from geometry_msgs.msg import Twist
 
 from autonomous_robot.holonomic_robot import HolonomicRobot
 from autonomous_robot.motor import Motor
@@ -12,7 +12,7 @@ class CmdVelListener(Node):
     def __init__(self):
         super().__init__('velocity_listener')
         self.subscription = self.create_subscription(
-            Vector3,
+            Twist,
             'robot_velocity',
             self.listener_callback,
             10)
@@ -24,7 +24,7 @@ class CmdVelListener(Node):
             Motor(35, 37, 31, False), 
             Motor(36, 38, 32, False))
               
-    def listener_callback(self, msg : Vector3):
+    def listener_callback(self, msg : Twist):
         self.robot.moveRobot(msg)
         self.get_logger().info('I heard: "%s, %s"' % (msg.x, msg.y))
 
