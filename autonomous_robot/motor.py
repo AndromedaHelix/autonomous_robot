@@ -28,25 +28,22 @@ class Motor:
 
     def moveMotor(self, angularVelocity : float):
         # PID
-        control = self.pid(angularVelocity)
+        #control = self.pid(angularVelocity)
 
-        # Checking if movement is less than 0, if yes, invert else keep the same value
-
-        if control < 0:
-            control = abs(control)
-            self.invert()
-        elif self.inverted:
-            self.invert()
-                
+        control = abs(angularVelocity)
         control = max(0, min(control, 100))
 
+        if control == 0:
+            self.pwm.ChangeDutyCycle(0)  # Stop the motor
+        else:
+            if self.inverted:
+                GPIO.output(self.IN1, GPIO.LOW if angularVelocity < 0 else GPIO.HIGH)
+                GPIO.output(self.IN2, GPIO.HIGH if angularVelocity < 0 else GPIO.LOW)
+            else:
+                GPIO.output(self.IN1, GPIO.HIGH if angularVelocity < 0 else GPIO.LOW)
+                GPIO.output(self.IN2, GPIO.LOW if angularVelocity < 0 else GPIO.HIGH)
+
         self.pwm.ChangeDutyCycle(control)
-        if self.inverted:
-            GPIO.output(self.IN1, GPIO.LOW)
-            GPIO.output(self.IN2, GPIO.HIGH)
-        else :
-            GPIO.output(self.IN1, GPIO.HIGH)
-            GPIO.output(self.IN2, GPIO.LOW)
 
     def stop(self):
         self.pwm.ChangeDutyCycle(0)
